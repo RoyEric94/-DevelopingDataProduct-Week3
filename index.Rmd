@@ -1,0 +1,33 @@
+---
+title: "DDP - Week 3 Assignment"
+author: "Eric Roy"
+date: "2020-10-17"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message=FALSE)
+library(plotly)
+```
+
+## Plotting with Plotly
+
+```{r airmiles, echo=FALSE, message=FALSE, warning=FALSE}
+data("HairEyeColor")
+# Hair colour between Male and Female
+x <- apply(HairEyeColor, c(1,3), sum)
+xData <- as.data.frame(x)
+colours <- c("Black", "saddlebrown", "Red", "Yellow")
+fig <- plot_ly(xData, x = xData$Female, y = xData$Male, type = 'scatter', mode = 'markers',
+        marker = list(size = abs(xData$Male + xData$Female) - 50, color = colours),
+        hoverinfo = 'text',
+        text = ~paste('Colour:', row.names(xData), '<br>Total:', xData$Male + xData$Female))
+fig <- fig %>% layout(title = 'Hair Colour by Gender',
+         xaxis = list(title = "Women", showgrid = FALSE),
+         yaxis = list(title = "Men", showgrid = FALSE))
+fig
+```
+
+## Thank You
+
+
